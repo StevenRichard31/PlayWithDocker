@@ -1,0 +1,25 @@
+version: "3"
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile # Le chemin vers votre Dockerfile pour le client
+    ports:
+      - "8080:8080" # Port pour accéder à l'application client
+    depends_on:
+      - server
+    networks:
+      - mon_reseau
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile # Le chemin vers votre Dockerfile pour le serveur
+    ports:
+      - "4000:4000" # Port pour accéder à votre serveur
+    networks:
+      - mon_reseau
+
+networks:
+  mon_reseau:
+    driver: bridge
